@@ -12,7 +12,7 @@
 * 安装 Terraform
 * 使用 Terraform 创建第一个虚拟机实例 EC2
 
-## [Day 2 EC2 VPC Security Group 部署第一个网站](day%201%20terraform%20介绍/day%201%20terraform%20介绍.md)
+## [Day 2 EC2 VPC Security Group 部署第一个网站](day%202%20EC2%20VPC%20Security%20Group%20部署第一个网站/day%202%20EC2%20VPC%20Security%20Group%20部署第一个网站.md)
 
 * VPC 回顾
 * VPC 关键概念介绍
