@@ -8,7 +8,7 @@
 
 如有纰漏，欢迎issue 😘
 
-## [Day 1 Terraform 介绍](day%202%20EC2%20VPC%20Security%20Group%20部署第一个网站/day%202%20EC2%20VPC%20Security%20Group%20部署第一个网站.md)
+## [Day 1 Terraform 介绍](day%201%20terraform%20介绍/day%201%20terraform%20介绍.md)
 
 * 什么是 Terraform
 * 安装 Terraform
