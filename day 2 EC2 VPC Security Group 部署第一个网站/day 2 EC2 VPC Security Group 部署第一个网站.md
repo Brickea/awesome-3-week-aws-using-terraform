@@ -12,7 +12,7 @@
 - [部署 Node.js 网站](#部署-nodejs-网站)
   - [配置 Infrastructure - VPC](#配置-infrastructure---vpc)
     - [疑问: IP 地址到底是怎么写的](#疑问-ip-地址到底是怎么写的)
-    - [疑问: 可能就是那个斜杠到底是干什么的](#疑问-可能就是那个斜杠到底是干什么的)
+    - [疑问: IP 地址最后那个斜杠到底是干什么的](#疑问-ip-地址最后那个斜杠到底是干什么的)
   - [配置 Infrastructure - Subnet](#配置-infrastructure---subnet)
   - [配置 Infrastructure - Internet Gateway](#配置-infrastructure---internet-gateway)
   - [配置 Infrastructure - Route Table](#配置-infrastructure---route-table)
@@ -113,7 +113,7 @@ Private IP地址，通常又被称为RFC1918地址，是按照IETF RFC 1918，�
   2. Private IP地址的路由信息不能对外发布，外部的IP数据包无法路由到Private IP地址的计算机上。
   3. IP数据包中的源地址和目的地址是Private IP地址的, 不能在Internet上的路由器间进行存储转发的操作。
 
-#### 疑问: 可能就是那个斜杠到底是干什么的
+#### 疑问: IP 地址最后那个斜杠到底是干什么的
 
 ip地址后面的斜杠24表示掩码位是24位的，即用32位二进制表示的子网掩码中有连续的24个“1”：11111111 11111111 11111111 00000000，将其转化为十进制，就是：255.255.255.0了。
 

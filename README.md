@@ -19,3 +19,9 @@
 * VPC 回顾
 * VPC 关键概念介绍
 * 利用 EC2 VPC Security Group 部署第一个 Nodejs 网站，并通过 ip 访问
+
+## [Day 3 Packer EC2 VPC SecurityGroup + Spring boot 部署第一个网站](Day%203%20Packer%20+%20Github%20Action%20部署虚拟机镜像/Day%203%20Packer%20+%20Github%20Action%20部署虚拟机镜像.md)
+
+* 回顾 Day 2
+* 本地使用 Packer 创建虚拟机镜像 AMI
+* Github action 触发 Packer 创建虚拟机镜像 AMI
