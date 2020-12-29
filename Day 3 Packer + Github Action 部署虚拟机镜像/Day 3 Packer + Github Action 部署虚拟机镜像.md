@@ -343,4 +343,8 @@ jobs:
 
 ![](res/sucess.png)
 
+这里可以看到最新的 AMI 已经被 GitHub action 创建好了
+
+![](res/actions_amie.png)
+
 <img src="https://media.giphy.com/media/fSGV9GtBfaExVJPJlQ/giphy.gif" width="50%">
