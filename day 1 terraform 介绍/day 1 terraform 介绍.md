@@ -185,6 +185,8 @@ aws configure --profile=your_profile_name # 可以查看对应的配置内容，
 
 > 这里直接选用 AWS 提供的 ami-0885b1f6bd170450c，注：这里截图是 AWS 网站控制台，我们只需关注 AMI id 即可，截图这个只是为了方便解释，后面我们会用 terraform 来创建相关资源而不用 AWS 网站
 
+这个 ami-id 会在后面使用 terraform 的时候用到
+
 ##### (Optional) 通过 packer 创建自己的 ami
 
 使用 [Packer](https://www.packer.io/) 可以自定义 AMI 的环境，像是预装对应的 jdk 或者数据库等等
