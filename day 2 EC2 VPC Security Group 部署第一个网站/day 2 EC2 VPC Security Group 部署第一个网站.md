@@ -1,5 +1,7 @@
 # EC2 VPC Security Group 部署第一个网站 <!-- omit in toc -->
 
+👉[本 Day 代码](terraform%20code/)
+
 <img src="https://media.giphy.com/media/IyxcGK3GbdCoHOMcln/giphy.gif" align="right" width="50%">
 
 - [Day 1 回顾](#day-1-回顾)

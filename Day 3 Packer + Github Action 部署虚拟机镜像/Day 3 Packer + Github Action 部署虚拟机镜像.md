@@ -1,5 +1,7 @@
 # Day 3 Packer + Github Action 部署虚拟机镜像<!-- omit in toc -->
 
+👉[本 Day 代码](packer%20code/)
+
 <img src="https://media.giphy.com/media/xUA7bdjDQYJiNauKfm/giphy.gif" width="50%" align="right">
 
 - [Day 2 回顾](#day-2-回顾)
