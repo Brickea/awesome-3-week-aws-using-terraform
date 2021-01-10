@@ -1,0 +1,34 @@
+name: Packer
+
+on: 
+  push:
+    branches: 
+      - main
+
+jobs:
+  packer:
+    runs-on: ubuntu-latest
+    name: packer
+
+    steps:
+      
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      # validate templates
+      - name: Validate Template
+        uses: operatehappy/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: ami_template.json
+
+      - name: Packer AMI Build
+        uses: zmingxie/packer-ami-builder@master
+        with:
+          packerArgs: 'build ami_template.json'
+          workDir: '.'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWSACCESSKEYID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWSSECRETKEY }}
+          AWS_DEFAULT_REGION: us-east-1
