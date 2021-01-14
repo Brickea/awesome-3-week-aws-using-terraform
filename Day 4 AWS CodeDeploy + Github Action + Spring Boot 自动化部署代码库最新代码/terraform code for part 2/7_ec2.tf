@@ -8,9 +8,9 @@ resource "aws_instance" "my_first_ec2_instance" {
 
     key_name = "awesome_terraform_aws" # 使用我们上一节中创建的 key pair
 
-    subnet_id = aws_subnet.my_subnet_alpha.id
+    iam_instance_profile = aws_iam_instance_profile.ec2_codedeploy_s3_access_profile.name
 
-    iam_instance_profile = aws_iam_instance_profile.s3_access_profile.name
+    subnet_id = aws_subnet.my_subnet_alpha.id
 
     associate_public_ip_address = true
 

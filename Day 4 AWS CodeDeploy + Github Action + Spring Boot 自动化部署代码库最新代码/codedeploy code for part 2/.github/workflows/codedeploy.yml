@@ -1,0 +1,90 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Build & Deploy WebApp
+
+env: # 这里定义了一些变量名
+  ARTIFACT_NAME: awesome-webapp-${{ github.sha }}.zip # 这里用到的 github.sha 会生成一个随机字符串，用来区分每一次构建的代码包
+  CODEDEPLOY_APPLICATION_NAME: awesome-codedeploy
+  CODEDEPLOY_APPLICATION_DEPLOYMENT_GROUP_NAME: awesome-deployment
+
+on: # action 出发条件为 master 分支的 push 操作
+  push:
+    branches:
+      - main
+
+jobs:
+  ci_cd:
+
+    runs-on: ubuntu-latest # 这里指定了github action 的执行环境
+
+    steps:
+    - uses: actions/checkout@v2 # 在 github action 的执行环境中拉取 本仓库最新代码
+
+    - name: Set up JDK 11 # 安装最新 jdk
+      uses: actions/setup-java@v1
+      with:
+        java-version: '11'
+    
+    - name: Build with Maven # 使用 maven 进行单元测试和 jar 包打包
+      run: | # run 后面写的内容，每一行可以理解为在 GitHub action 环境中按照顺序执行的每一行命令 这些命令的执行结果可以在 GitHub action 上看到
+        echo '当前 java 版本'
+        java -version
+
+        echo '代码包包名：${{env.ARTIFACT_NAME}}'
+
+        echo '当前路径为代码仓库的根目录'
+        pwd
+        ls
+
+        echo '使用 maven 进行依赖安装并且进行单元测试和 jar 包打包'
+        sudo mvn -B clean install --file springbootCode/pom.xml
+        sudo mvn -e -B package --file springbootCode/pom.xml
+        echo '完成依赖安装以及单元测试和 jar 包打包'
+
+        pwd
+        echo '查看 target 文件目录下是否有 jar 包'
+        ls -al springbootCode/target
+
+        echo '移动到 target 文件目录下'
+        cd springbootCode/target
+        pwd
+        ls -al
+
+    - name: Build Deployment Artifact # 创建上传到 s3 中的 代码部署包
+      run: |
+        echo '创建 codedeploy_artifact 目录'
+        mkdir codedeploy_artifact
+        echo '将对应 jar 包压缩'
+        zip -r ${{ env.ARTIFACT_NAME }} springbootCode/target/awesomeday4part1-0.0.1-SNAPSHOT.jar codedeploy/*.sh appspec.yml
+        ls -al
+        echo '将对应压缩包 zip 放入到 codedeploy_artifact 目录'
+        mv ${{ env.ARTIFACT_NAME }} codedeploy_artifact/
+        ls -al
+        echo '进入 codedeploy_artifact 目录进行验证'
+        cd codedeploy_artifact
+        ls -al
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.CICD_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{secrets.CICD_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Copy Artifact to S3
+      run: |
+        aws s3 sync ./codedeploy_artifact s3://${{ secrets.S3_CODEDEPLOY_BUCKET }}
+
+    - name: CodeDeploy API call
+      run: |
+        output=$(aws deploy create-deployment \
+        --application-name ${{ env.CODEDEPLOY_APPLICATION_NAME }} \
+        --deployment-config-name CodeDeployDefault.OneAtATime \
+        --deployment-group-name ${{ env.CODEDEPLOY_APPLICATION_DEPLOYMENT_GROUP_NAME }} \
+        --s3-location bucket=${{ secrets.S3_CODEDEPLOY_BUCKET }},bundleType=zip,key=${{ env.ARTIFACT_NAME }} \
+        --region ${{ secrets.AWS_REGION }} \
+        --output json)
+        echo $output
+        dId=$(echo $output | jq -r '.deploymentId')
+        aws deploy wait deployment-successful --deployment-id $dId

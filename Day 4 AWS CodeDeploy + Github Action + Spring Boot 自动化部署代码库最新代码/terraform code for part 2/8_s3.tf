@@ -19,12 +19,3 @@ resource "aws_s3_bucket" "awesome_webapp_s3" {
     Name        = "awesome webapp codedeploy s3"
   }
 }
-
-// 为 webapp 创建一个专门放 代码部署包 的 文件夹
-resource "aws_s3_bucket_object" "webapp_base_folder" {
-    bucket = aws_s3_bucket.awesome_webapp_s3.id
-    acl    = "private"
-    key    = "awesome_webapp_codedeploy/"
-
-    depends_on = [ aws_s3_bucket.awesome_webapp_s3 ]
-}

@@ -26,7 +26,7 @@
 * 本地使用 Packer 创建虚拟机镜像 AMI
 * Github action 触发 Packer 创建虚拟机镜像 AMI
 
-## [Day 4 AWS CodeDeploy + Github Action + Spring Boot 自动化部署代码库最新代码](Day%204%20AWS%20CodeDeploy%20+%20Github%20Action%20+%20Spring%20Boot%20自动化部署代码库最新代码/Day%204%20AWS%20CodeDeploy%20+%20Github%20Action%20+%20Spring%20Boot%20自动化部署代码库最新代码.md) (未完待续)
+## [Day 4 - 7  AWS CodeDeploy + Github Action + Spring Boot 自动化部署代码库最新代码](Day%204%20AWS%20CodeDeploy%20+%20Github%20Action%20+%20Spring%20Boot%20自动化部署代码库最新代码/Day%204%20AWS%20CodeDeploy%20+%20Github%20Action%20+%20Spring%20Boot%20自动化部署代码库最新代码.md) (内容较多))
 
-* 介绍 AWS CodeDeploy、S3
-* 使用 Github action 触发 codedeploy
+* Part 1 手动实现代码部署步骤
+* Part 2 部署步骤自动化
